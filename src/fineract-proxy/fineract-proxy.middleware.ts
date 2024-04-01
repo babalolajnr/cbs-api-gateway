@@ -5,12 +5,12 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 export class FineractProxyMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
     const proxy = createProxyMiddleware({
-      target: 'https://theprimetic.com/', // Replace with the actual Apache Fineract URL
+      target: 'https://143.110.166.125:8443/', // Replace with the actual Apache Fineract URL
       changeOrigin: true,
       pathRewrite: {
-        // '^/fineract': '', // Remove '/fineract' from the path
-        '^/gateway': '', // Remove '/fineract' from the path
+        '^/gateway': '/fineract-provider/api/v1/v1/',
       },
+      secure: false,
     });
 
     return proxy(req, res, next);
